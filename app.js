@@ -1,14 +1,14 @@
 const models = [
-  { brand: "NAVIEN", name: "NAVIEN ACE-13K", price: 366000, power: "13 кВт", area: "до 130 м2", type: "настенный, двухконтурный", feature: "Компактный вариант для квартиры или небольшого дома", service: "Диагностика, промывка теплообменника, настройка давления газа" },
-  { brand: "NAVIEN", name: "NAVIEN DELUXE S-16K", price: 356000, power: "16 кВт", area: "до 160 м2", type: "настенный, двухконтурный", feature: "Популярная серия для квартир и таунхаусов", service: "Плановое обслуживание, проверка датчиков, запуск после простоя" },
-  { brand: "Очаг", name: "Очаг АОГВ-45 EN", price: 480790, power: "45 кВт", area: "до 450 м2", type: "напольный, одноконтурный", feature: "Для больших домов и коммерческих помещений", service: "Проверка тяги, автоматики и безопасности горелки" },
-  { brand: "NAVIEN", name: "NAVIEN Deluxe-C13", price: 346000, power: "13 кВт", area: "до 130 м2", type: "настенный, двухконтурный", feature: "Базовая модель для отопления и горячей воды", service: "Чистка камеры, проверка вентилятора и платы управления" },
-  { brand: "NAVIEN", name: "NAVIEN Deluxe-C16", price: 356000, power: "16 кВт", area: "до 160 м2", type: "настенный, двухконтурный", feature: "Частый выбор для городских квартир Алматы", service: "Сервис перед сезоном, устранение ошибок и перепадов давления" },
-  { brand: "Rinnai", name: "Rinnai RBK-158KTU", price: 464000, power: "18 кВт", area: "до 180 м2", type: "настенный, двухконтурный", feature: "Надежный японский бренд для стабильной работы", service: "Проверка платы, теплообменника, насосного узла" },
-  { brand: "Daewoo", name: "Daewoo DGB 100 MSC", price: 310000, power: "11.6 кВт", area: "до 110 м2", type: "настенный, двухконтурный", feature: "Доступное решение для небольших помещений", service: "Чистка, регулировка, поиск причин нестабильного розжига" },
-  { brand: "Daewoo", name: "Daewoo DGB 130 MSC", price: 315000, power: "15.1 кВт", area: "до 150 м2", type: "настенный, двухконтурный", feature: "Баланс цены и мощности для квартиры", service: "Обслуживание контура ГВС, датчиков и циркуляции" },
-  { brand: "Baxi", name: "Baxi ECO Four 24", price: 471470, power: "24 кВт", area: "до 240 м2", type: "настенный, двухконтурный", feature: "Распространенная модель для дома и квартиры", service: "Оригинальные настройки, чистка теплообменника, проверка ошибок" },
-  { brand: "Ariston", name: "Ariston CLAS X 24 FF", price: 459520, power: "24 кВт", area: "до 240 м2", type: "настенный, двухконтурный", feature: "Универсальная модель с понятным управлением", service: "Сервис горелки, вентилятора, датчиков температуры" }
+  { brand: "NAVIEN", name: "NAVIEN ACE-13K", price: 366000, power: "13 кВт", area: "до 130 м2", type: "настенный, двухконтурный", image: "assets/boilers/navien-ace-13k.jpg", imageSource: "interteplo.kz", feature: "Компактный вариант для квартиры или небольшого дома", service: "Диагностика, промывка теплообменника, настройка давления газа" },
+  { brand: "NAVIEN", name: "NAVIEN DELUXE S-16K", price: 356000, power: "16 кВт", area: "до 160 м2", type: "настенный, двухконтурный", image: "assets/boilers/navien-deluxe-s-16k.jpg", imageSource: "teplotehnika.kz", feature: "Популярная серия для квартир и таунхаусов", service: "Плановое обслуживание, проверка датчиков, запуск после простоя" },
+  { brand: "Очаг", name: "Очаг АОГВ-45 EN", price: 480790, power: "45 кВт", area: "до 450 м2", type: "напольный, одноконтурный", image: "assets/boilers/ochag-aogv-45-en.jpg", imageSource: "technodom.kz", feature: "Для больших домов и коммерческих помещений", service: "Проверка тяги, автоматики и безопасности горелки" },
+  { brand: "NAVIEN", name: "NAVIEN Deluxe-C13", price: 346000, power: "13 кВт", area: "до 130 м2", type: "настенный, двухконтурный", image: "assets/boilers/navien-deluxe-c13.jpg", imageSource: "teplotehnika.kz", feature: "Базовая модель для отопления и горячей воды", service: "Чистка камеры, проверка вентилятора и платы управления" },
+  { brand: "NAVIEN", name: "NAVIEN Deluxe-C16", price: 356000, power: "16 кВт", area: "до 160 м2", type: "настенный, двухконтурный", image: "assets/boilers/navien-deluxe-c16.jpg", imageSource: "technodom.kz", feature: "Частый выбор для городских квартир Алматы", service: "Сервис перед сезоном, устранение ошибок и перепадов давления" },
+  { brand: "Rinnai", name: "Rinnai RBK-158KTU", price: 464000, power: "18 кВт", area: "до 180 м2", type: "настенный, двухконтурный", image: "assets/boilers/rinnai-rbk-158ktu.jpg", imageSource: "koreastar.kz", feature: "Надежный японский бренд для стабильной работы", service: "Проверка платы, теплообменника, насосного узла" },
+  { brand: "Daewoo", name: "Daewoo DGB 100 MSC", price: 310000, power: "11.6 кВт", area: "до 110 м2", type: "настенный, двухконтурный", image: "assets/boilers/daewoo-dgb-100-msc.jpg", imageSource: "region-comfort.ru", feature: "Доступное решение для небольших помещений", service: "Чистка, регулировка, поиск причин нестабильного розжига" },
+  { brand: "Daewoo", name: "Daewoo DGB 130 MSC", price: 315000, power: "15.1 кВт", area: "до 150 м2", type: "настенный, двухконтурный", image: "assets/boilers/daewoo-dgb-130-msc.jpg", imageSource: "region-comfort.ru", feature: "Баланс цены и мощности для квартиры", service: "Обслуживание контура ГВС, датчиков и циркуляции" },
+  { brand: "Baxi", name: "Baxi ECO Four 24", price: 471470, power: "24 кВт", area: "до 240 м2", type: "настенный, двухконтурный", image: "assets/boilers/baxi-eco-four-24.png", imageSource: "baxi.com", feature: "Распространенная модель для дома и квартиры", service: "Оригинальные настройки, чистка теплообменника, проверка ошибок" },
+  { brand: "Ariston", name: "Ariston CLAS X 24 FF", price: 459520, power: "24 кВт", area: "до 240 м2", type: "настенный, двухконтурный", image: "assets/boilers/ariston-clas-x-24-ff.jpg", imageSource: "stroyka.uz", feature: "Универсальная модель с понятным управлением", service: "Сервис горелки, вентилятора, датчиков температуры" }
 ];
 
 function formatPrice(value) {
@@ -40,7 +40,8 @@ function productCard(model, index) {
   return `
     <article class="product-card" data-brand="${model.brand}">
       <div class="product-media">
-        <img src="${boilerSvg(model, index)}" alt="Изображение газового котла ${model.name}">
+        <img src="${model.image || boilerSvg(model, index)}" alt="Фронтальное фото газового котла ${model.name}">
+        <span class="image-source">Фото: ${model.imageSource}</span>
       </div>
       <div class="product-body">
         <div class="badges"><span class="badge">${model.brand}</span><span class="badge">${model.power}</span></div>
@@ -73,7 +74,7 @@ function renderCompare() {
   body.innerHTML = models.map((model, index) => `
     <tr>
       <td><strong>${model.name}</strong><br><span class="muted">${model.brand}</span></td>
-      <td><img src="${boilerSvg(model, index)}" alt="${model.name}" width="96"></td>
+      <td><img class="compare-thumb" src="${model.image || boilerSvg(model, index)}" alt="${model.name}"></td>
       <td>${formatPrice(model.price)}<br><span class="muted">ориентировочно</span></td>
       <td>${model.power}</td>
       <td>${model.area}</td>

@@ -26,6 +26,8 @@ http://localhost:5173/index.html
 
 - Prices are approximate and should be confirmed before production use.
 - The request form is a local mockup and does not send data.
-- Product images are baseline SVG illustrations so the prototype works offline.
+- Product images are stored locally in `assets/boilers/` and normalized into one storefront card system.
+- Image sources are listed in `assets/boilers/SOURCES.md`.
+- Imagegen frontend section targets are stored in `design-targets/`.
 - The included Codex skill lives in `codex-skill/almaty-kotly-baseline`.
 - The visual system is adapted from `design-system/deck-card-presentation.DESIGN.md`.
