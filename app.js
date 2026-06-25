@@ -16,21 +16,22 @@ function formatPrice(value) {
 }
 
 function boilerSvg(model, index) {
-  const colors = ["146c94", "d7472f", "1f8a58", "6a7785", "0f526f"];
+  const colors = ["028090", "00a896", "02c39a", "36454f", "212121"];
   const color = colors[index % colors.length];
   const short = model.brand;
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img">
-    <rect width="360" height="260" rx="18" fill="#eef6f9"/>
-    <rect x="102" y="24" width="156" height="208" rx="18" fill="#ffffff" stroke="#91a7b3" stroke-width="6"/>
-    <rect x="126" y="52" width="108" height="44" rx="8" fill="#${color}"/>
+    <rect width="360" height="260" rx="18" fill="#f4f5f7"/>
+    <rect x="102" y="24" width="156" height="208" rx="14" fill="#ffffff" stroke="#d7dedf" stroke-width="6"/>
+    <circle cx="135" cy="68" r="17" fill="#${color}"/>
+    <rect x="160" y="50" width="72" height="36" rx="8" fill="#${color}"/>
     <text x="180" y="81" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#ffffff">${short}</text>
-    <circle cx="150" cy="132" r="20" fill="#d7472f"/>
-    <circle cx="210" cy="132" r="20" fill="#1f8a58"/>
-    <rect x="134" y="170" width="92" height="22" rx="5" fill="#dfe7eb"/>
-    <path d="M144 232v20M180 232v20M216 232v20" stroke="#91a7b3" stroke-width="8" stroke-linecap="round"/>
-    <path d="M260 84c36 16 58 44 66 84" fill="none" stroke="#b7cad3" stroke-width="10" stroke-linecap="round"/>
-    <path d="M34 190h78" stroke="#cbd9df" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="150" cy="132" r="20" fill="#028090"/>
+    <circle cx="210" cy="132" r="20" fill="#02c39a"/>
+    <rect x="134" y="170" width="92" height="22" rx="5" fill="#eef8f6"/>
+    <path d="M144 232v20M180 232v20M216 232v20" stroke="#d7dedf" stroke-width="8" stroke-linecap="round"/>
+    <path d="M260 84c36 16 58 44 66 84" fill="none" stroke="#00a896" stroke-opacity=".28" stroke-width="10" stroke-linecap="round"/>
+    <path d="M34 190h78" stroke="#d7dedf" stroke-width="12" stroke-linecap="round"/>
   </svg>`;
   return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
 }

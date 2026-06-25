@@ -28,3 +28,4 @@ http://localhost:5173/index.html
 - The request form is a local mockup and does not send data.
 - Product images are baseline SVG illustrations so the prototype works offline.
 - The included Codex skill lives in `codex-skill/almaty-kotly-baseline`.
+- The visual system is adapted from `design-system/deck-card-presentation.DESIGN.md`.
