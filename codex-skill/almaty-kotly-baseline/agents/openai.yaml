@@ -1,0 +1,4 @@
+interface:
+  display_name: "Almaty Kotly Baseline"
+  short_description: "Baseline boiler service site workflow"
+  default_prompt: "Use $almaty-kotly-baseline to create a baseline gas boiler service website for Almaty."
