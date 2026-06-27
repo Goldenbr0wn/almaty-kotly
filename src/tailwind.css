@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-ui: "Manrope Variable", Inter, system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --color-almaty-ink: #101817;
+  --color-almaty-paper: #f4efe6;
+  --color-almaty-teal: #006f6a;
+  --color-almaty-mint: #19b7a5;
+  --color-almaty-brass: #c2a25f;
+}

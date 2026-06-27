@@ -44,7 +44,7 @@ function productCard(model, index) {
         <span class="image-source">Фото: ${model.imageSource}</span>
       </div>
       <div class="product-body">
-        <div class="badges"><span class="badge">${model.brand}</span><span class="badge">${model.power}</span></div>
+        <div class="badges"><span class="badge">${model.brand}</span><span class="badge">${model.power}</span><span class="badge">Гарантия 12 месяцев</span></div>
         <h3>${model.name}</h3>
         <p class="muted">${model.feature}</p>
         <div class="price">${formatPrice(model.price)}</div>
@@ -99,6 +99,7 @@ function setupFilters() {
 
 function setupRequestForm() {
   const form = document.getElementById("requestForm");
+  const homeForm = document.getElementById("homeRequestForm");
   const notice = document.getElementById("formNotice");
   const modelSelect = document.getElementById("modelSelect");
   if (modelSelect) {
@@ -106,6 +107,12 @@ function setupRequestForm() {
     const params = new URLSearchParams(window.location.search);
     const selected = params.get("model");
     if (selected) modelSelect.value = selected;
+  }
+  if (homeForm) {
+    homeForm.addEventListener("submit", event => {
+      event.preventDefault();
+      homeForm.classList.add("submitted");
+    });
   }
   if (!form || !notice) return;
   form.addEventListener("submit", event => {
@@ -123,7 +130,7 @@ function setActiveNav() {
   });
 }
 
-renderProducts("popularProducts", 3);
+renderProducts("popularProducts", 9);
 renderProducts("catalogProducts");
 renderCompare();
 setupFilters();

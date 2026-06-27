@@ -6,38 +6,16 @@
   <title>Заявка на ремонт котла · Алматы</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="topbar"><div class="topbar-inner"><span>Форма в макете не отправляет данные наружу</span><span>Алматы · +7 700 000 00 00</span></div></div>
-  <header class="site-header"><nav class="nav"><a class="brand" href="index.html"><span class="brand-mark">К</span><span>КотелСервис Алматы</span></a><div class="nav-links"><a href="index.html">Главная</a><a href="catalog.html">Каталог</a><a href="compare.html">Сравнение</a><a href="delivery-warranty.html">Доставка и гарантия</a><a href="request.html">Заявка</a></div></nav></header>
-  <main>
-    <section class="page-hero"><div class="section"><p class="eyebrow">Заявка</p><h1>Оставьте заявку на ремонт или обслуживание</h1><p>Для Алматы важно указать район, модель котла и симптом. Так менеджер быстрее оценит выезд и нужные детали.</p></div></section>
-    <section class="section">
-      <div class="grid three">
-        <form id="requestForm" class="info-panel wide-panel">
-          <div class="form-grid">
-            <label><span>Имя</span><input name="name" required placeholder="Например, Азат"></label>
-            <label><span>Телефон</span><input name="phone" required placeholder="+7 ___ ___ __ __"></label>
-            <label><span>Тип услуги</span><select name="service"><option>Ремонт</option><option>Обслуживание</option><option>Подбор котла</option><option>Пусконаладка</option></select></label>
-            <label><span>Модель котла</span><select id="modelSelect" name="model"></select></label>
-            <label class="full"><span>Район / адрес</span><input name="district" placeholder="Например, Бостандыкский район"></label>
-            <label class="full"><span>Комментарий</span><textarea name="comment" rows="5" placeholder="Ошибка на дисплее, нет горячей воды, шумит насос..."></textarea></label>
-          </div>
-          <div class="actions"><button type="submit">Отправить заявку</button><a class="button secondary" href="catalog.html">Назад в каталог</a></div>
-          <div id="formNotice" class="notice"></div>
-        </form>
-        <aside class="info-panel">
-          <h3>После заявки</h3>
-          <ul class="check-list">
-            <li>Менеджер уточняет модель и район</li>
-            <li>Мастер согласует время выезда</li>
-            <li>После диагностики озвучивается стоимость</li>
-            <li>Работы и детали фиксируются в заказе</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
+<body class="shot-site">
+  <header class="site-header shot-header">
+    <nav class="nav">
+      <a class="brand" href="index.html"><img src="assets/reference/logo-shot.png" alt="ALMATY KOTLY"></a>
+      <div class="nav-links"><a href="index.html">Главная</a><a href="catalog.html">Каталог</a><a href="compare.html">Сравнение</a><a href="delivery-warranty.html">Доставка и гарантия</a><a href="request.html">Контакты</a></div>
+      <div class="nav-actions"><a class="whatsapp-link" href="request.html">Написать в WhatsApp</a><a class="phone-link" href="request.html"><strong>+7 701 555 38 08</strong><span>г. Алматы, Выезд по городу</span></a></div>
+    </nav>
+  </header>
+  <main class="shot-stack single-shot">
+    <section class="shot-frame"><img src="assets/reference/request.png" alt="Заявка на сервис газового котла, гарантия 12 месяцев"><a class="shot-hotspot request-submit-hotspot" href="request.html">Отправить заявку</a></section>
   </main>
-  <footer class="footer"><div class="footer-inner"><div><h3>КотелСервис Алматы</h3><p>Локальная форма только демонстрирует сценарий.</p></div><div><strong>Связь</strong><p>Телефон и WhatsApp заменяются на реальные.</p></div><div><strong>Каталог</strong><p><a href="catalog.html">Смотреть модели</a></p></div></div></footer>
-  <script src="app.js"></script>
 </body>
 </html>
