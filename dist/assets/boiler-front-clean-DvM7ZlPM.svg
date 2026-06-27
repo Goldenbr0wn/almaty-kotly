@@ -1,0 +1,65 @@
+<svg width="420" height="720" viewBox="0 0 420 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="body" x1="82" y1="54" x2="348" y2="626" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.48" stop-color="#F6F8F8"/>
+      <stop offset="1" stop-color="#E7ECEB"/>
+    </linearGradient>
+    <linearGradient id="side" x1="324" y1="68" x2="370" y2="622" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F5F5"/>
+      <stop offset="1" stop-color="#CFD7D6"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="122" y1="452" x2="306" y2="524" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1518"/>
+      <stop offset="1" stop-color="#22282B"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="179" y1="2" x2="241" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9DFDE"/>
+      <stop offset="0.46" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#8F9998"/>
+    </linearGradient>
+    <filter id="softShadow" x="44" y="32" width="336" height="648" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#071413" flood-opacity="0.18"/>
+    </filter>
+    <filter id="panelShadow" x="105" y="438" width="218" height="106" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <path d="M189 58V18C189 8 197 0 207 0H235C245 0 253 8 253 18V58H189Z" fill="url(#metal)"/>
+    <path d="M194 58V22C194 15 200 9 207 9H235C242 9 248 15 248 22V58H194Z" stroke="#A8B1B0" stroke-width="2" opacity="0.55"/>
+
+    <path d="M78 82C78 62 94 46 114 46H308C332 46 351 65 351 89V591C351 615 332 634 308 634H114C94 634 78 618 78 598V82Z" fill="url(#body)"/>
+    <path d="M308 47C332 47 351 66 351 90V590C351 614 332 633 308 633H326C351 633 371 613 371 588V92C371 67 351 47 326 47H308Z" fill="url(#side)"/>
+    <path d="M78 82C78 62 94 46 114 46H308C332 46 351 65 351 89V591C351 615 332 634 308 634H114C94 634 78 618 78 598V82Z" stroke="#D7DEDD" stroke-width="2"/>
+    <path d="M110 92C110 83 117 76 126 76H286C302 76 315 89 315 105V374C315 389 303 401 288 401H130C119 401 110 392 110 381V92Z" fill="white" opacity="0.5"/>
+    <path d="M111 92C111 83 118 76 127 76H287" stroke="#FFFFFF" stroke-width="3" opacity="0.62"/>
+
+    <text x="211" y="220" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="22" fill="#4A5357" letter-spacing="1.2">NAVIEN</text>
+    <path d="M169 236C191 226 228 226 250 236" stroke="#BAC2C1" stroke-width="2" opacity="0.35"/>
+
+    <g filter="url(#panelShadow)">
+      <rect x="118" y="452" width="190" height="72" rx="10" fill="url(#panel)"/>
+      <rect x="120" y="454" width="186" height="68" rx="9" stroke="#525A5E" stroke-width="1.5" opacity="0.6"/>
+      <text x="213" y="493" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="28" fill="#F7FAFA">50°</text>
+      <circle cx="151" cy="488" r="10" stroke="#AEB7BA" stroke-width="2"/>
+      <path d="M151 482V489" stroke="#F4F7F7" stroke-width="2" stroke-linecap="round"/>
+      <path d="M271 488H286M278.5 480.5V495.5" stroke="#F4F7F7" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M148 509h11M192 509h11M225 509h11M268 509h11" stroke="#BFC7C9" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <g>
+      <rect x="107" y="632" width="22" height="52" rx="6" fill="#B4814D"/>
+      <rect x="111" y="674" width="14" height="30" rx="4" fill="#7B4D25"/>
+      <rect x="157" y="632" width="20" height="50" rx="6" fill="#BFC6C5"/>
+      <rect x="160" y="674" width="14" height="30" rx="4" fill="#8B9594"/>
+      <rect x="205" y="632" width="20" height="50" rx="6" fill="#B4814D"/>
+      <rect x="208" y="674" width="14" height="30" rx="4" fill="#744A26"/>
+      <rect x="254" y="632" width="20" height="50" rx="6" fill="#BFC6C5"/>
+      <rect x="257" y="674" width="14" height="30" rx="4" fill="#879190"/>
+      <rect x="303" y="632" width="22" height="52" rx="6" fill="#B4814D"/>
+      <rect x="307" y="674" width="14" height="30" rx="4" fill="#7B4D25"/>
+    </g>
+  </g>
+</svg>

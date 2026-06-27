@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ремонт газовых котлов в Алматы</title>
+  <script type="module" crossorigin src="/assets/index-mobilefix3-20260628.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-mobilefix3-20260628.css">
+</head>
+	<body class="shot-site">
+	  <div id="root"></div>
+	  <script>
+	    (function () {
+	      var requestTexts = ["уточнить цену", "подобрать", "уточнить выезд"];
+
+	      function scrollToSection(id) {
+	        var target = document.getElementById(id);
+	        var header = document.querySelector(".site-header");
+	        if (!target) return;
+	        history.pushState(null, "", "#" + id);
+	        var headerHeight = header ? header.getBoundingClientRect().height : 0;
+	        var top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 12;
+	        window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+	      }
+
+	      function scrollCatalogIntoView() {
+	        var target = document.querySelector("#catalog .featured-product") || document.querySelector("#catalog .section-heading") || document.getElementById("catalog");
+	        var header = document.querySelector(".site-header");
+	        if (!target) return;
+	        var headerHeight = header ? header.getBoundingClientRect().height : 0;
+        var top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 12;
+        window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+      }
+
+	      document.addEventListener("click", function (event) {
+	        var link = event.target.closest && event.target.closest('a[href="#catalog"]');
+	        if (!link) return;
+	        event.preventDefault();
+	        history.pushState(null, "", "#catalog");
+	        requestAnimationFrame(function () {
+	          setTimeout(scrollCatalogIntoView, 0);
+	        });
+	      });
+
+	      document.addEventListener("click", function (event) {
+	        var button = event.target.closest && event.target.closest("button");
+	        if (!button || button.closest(".request-form")) return;
+
+	        var text = (button.textContent || button.getAttribute("aria-label") || "").trim().toLowerCase();
+	        if (requestTexts.some(function (item) { return text.indexOf(item) !== -1; })) {
+	          event.preventDefault();
+	          scrollToSection("request");
+	          return;
+	        }
+
+	        if (button.getAttribute("aria-label") === "Добавить в избранное") {
+	          event.preventDefault();
+	          button.setAttribute("aria-pressed", button.getAttribute("aria-pressed") === "true" ? "false" : "true");
+	          button.classList.toggle("is-active");
+	        }
+	      });
+
+	      document.addEventListener("click", function (event) {
+	        var tab = event.target.closest && event.target.closest(".detail-tabs button, .detail-tabs span");
+	        if (!tab) return;
+	        event.preventDefault();
+	        tab.parentElement.querySelectorAll("button, span").forEach(function (item) {
+	          item.classList.toggle("is-active", item === tab);
+	        });
+	      });
+
+	      window.addEventListener("load", function () {
+	        if (location.hash === "#catalog") {
+	          setTimeout(scrollCatalogIntoView, 20);
+	        }
+	      });
+	    })();
+	  </script>
+</body>
+</html>
