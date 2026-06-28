@@ -8,3 +8,5 @@ dist/
 .vercel/
 .runtime/
 .supergoal.backup-*/
+.vercel
+.env*
