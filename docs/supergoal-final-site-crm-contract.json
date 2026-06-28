@@ -1,0 +1,305 @@
+{
+  "schema_version": "3.0",
+  "protocol_version": "3.0",
+  "contract_revision": 2,
+  "profile": "production-adjacent-final-site-crm-supabase",
+  "goal": {
+    "id": "sg-20260628-alatau-final-site-crm",
+    "title": "Alatau Final Site CRM",
+    "objective": "Make http://localhost:5173 show the latest visual boiler site from dist, with working lead capture, CRM, admin, profile, and Supabase-backed data/auth on the same server; local/prod preview may overwrite the temporary Next UI.",
+    "request_digest": "User rejected the temporary Next frontend and asked for a new SuperGoal where the final visual site is visible immediately, with CRM, admin, profile, and live Supabase on localhost:5173, allowing overwrite of the current local site.",
+    "workspace_root": "/Users/azat/Desktop/.github/almaty-kotly",
+    "owner": "Azat",
+    "non_goals": [
+      "Do not preserve the temporary plain Next frontend as the public homepage.",
+      "Do not mutate DNS, router, or public alatau-service.com traffic in this goal unless separately requested again.",
+      "Do not print or commit real Supabase service keys, tokens, cookies, or env values.",
+      "Do not edit AGENTS.md or protected agent config."
+    ],
+    "done_condition": "localhost:5173 renders the latest dist visual site at /, lead capture writes through the backend, CRM/admin/profile routes are visible and protected where appropriate, Supabase mode is either verified against a configured live project or an exact missing-credentials blocker is recorded, and build/lint/test/smoke evidence passes."
+  },
+  "source_set": [
+    {
+      "id": "repo",
+      "kind": "local_repo",
+      "locator": "/Users/azat/Desktop/.github/almaty-kotly",
+      "authority": "canonical code workspace",
+      "freshness": "checked 2026-06-28",
+      "sensitivity": "internal",
+      "used_by": ["all phases"]
+    },
+    {
+      "id": "final-dist",
+      "kind": "build_artifact",
+      "locator": "dist/index.html and dist/assets/index-mobilefix3-20260628.*",
+      "authority": "latest user-approved visual site in current worktree",
+      "freshness": "checked 2026-06-28",
+      "sensitivity": "internal",
+      "used_by": ["P01", "P02", "P03"]
+    },
+    {
+      "id": "local-runtime",
+      "kind": "runtime",
+      "locator": "http://localhost:5173",
+      "authority": "current local preview target",
+      "freshness": "checked 2026-06-28",
+      "sensitivity": "internal",
+      "used_by": ["P02", "P06"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "The dist visual site is the public homepage source of truth for this goal.",
+      "reason": "The user explicitly identified the previous Next homepage as the wrong site and asked for the latest variant."
+    },
+    {
+      "id": "d2",
+      "decision": "Keep Next.js as the server/runtime shell for API, CRM, admin, profile, health, release, and Supabase integration.",
+      "reason": "It can serve the final visual site and backend routes from one localhost/prod runtime."
+    },
+    {
+      "id": "d3",
+      "decision": "Supabase is the desired production data/auth authority; memory mode is only an explicit local fallback while credentials are unavailable.",
+      "reason": "The user asked for live Supabase, but secret values must not be guessed or exposed."
+    }
+  ],
+  "architecture": {
+    "public_site": "Next root renders the dist visual app and serves dist assets from public/assets.",
+    "lead_capture": "A capture script posts the final site's request form to /api/leads without replacing the visual bundle.",
+    "crm": "Server-rendered CRM/admin/profile pages share repository and admin-session boundaries.",
+    "database": "Supabase repository is production authority when env is configured; memory repository is local fallback only.",
+    "auth": "Admin/profile routes use server-resolved admin session, Supabase magic link when configured, and explicit local admin env only in memory mode.",
+    "ops": "Preview/build scripts must copy static assets and prove CSS/images/API health on localhost:5173."
+  },
+  "loop": {
+    "host_model": "standard Hermes /goal",
+    "reviewer": "embedded RPD/Senior Gate",
+    "max_turns": 16,
+    "max_retries_per_gate": 3,
+    "approval_boundary": "real Supabase secret changes, production DB migrations, public DNS/router/service changes, external sends, protected config"
+  },
+  "risks": [
+    {
+      "id": "r1",
+      "tag": "wrong frontend regression",
+      "severity": "P1",
+      "mitigation": "Root route smoke must prove visual site markers from dist, CSS, and hero assets are loaded."
+    },
+    {
+      "id": "r2",
+      "tag": "lead data exposure",
+      "severity": "P1",
+      "mitigation": "Server-side validation, no secret output, admin session checks, and secret scan."
+    },
+    {
+      "id": "r3",
+      "tag": "supabase authority ambiguity",
+      "severity": "P1",
+      "mitigation": "Health endpoint reports backend mode; final audit must prove Supabase mode or record exact missing-credential blocker."
+    }
+  ],
+  "approvals": [
+    {
+      "id": "a1",
+      "class_name": "Supabase production credentials/migration",
+      "scope": "Reading/writing real production secret values or applying migrations to a managed Supabase project.",
+      "required": true
+    },
+    {
+      "id": "a2",
+      "class_name": "Public production traffic",
+      "scope": "Changing DNS, router forwarding, firewall, TLS, launchd, or public alatau-service.com traffic.",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "P01",
+      "ordinal": 1,
+      "name": "Baseline and final visual source lock",
+      "task": "Lock the latest dist site as the public UI source and record why the temporary Next UI is wrong.",
+      "depends_on": [],
+      "work_items": [
+        {"text": "Capture repo status and dist asset names."},
+        {"text": "Record root route must show final dist markers, not temporary Next copy."}
+      ],
+      "deliverables": [
+        {"id": "P01-D01", "kind": "report", "path": ".supergoal/reports/final-site-source-lock.md", "change_expectation": "new", "verification": "report cites dist/index.html and asset bundle names"}
+      ],
+      "criteria": [
+        {"id": "P01-C01", "statement": "Final dist bundle is named as the public homepage authority.", "verifier": {"type": "file", "expected_assertion": "report exists"}, "evidence_tier": "direct_artifact", "blocking": true},
+        {"id": "P01-C02", "statement": "Existing dirty dist files are preserved rather than reverted.", "verifier": {"type": "command", "command_id": "P01-CMD01", "expected_exit": 0}, "evidence_tier": "direct_artifact", "blocking": true}
+      ],
+      "commands": [
+        {"id": "P01-CMD01", "command": "git status --short --branch", "purpose": "capture current dirty tree", "safety": "local_read_write", "timeout_seconds": 120},
+        {"id": "P01-CMD02", "command": "sed -n '1,80p' dist/index.html", "purpose": "capture final dist entry", "safety": "local_read_write", "timeout_seconds": 120}
+      ],
+      "risk_tags": ["control_plane", "public_launch"],
+      "rpd": {"required": true, "focus": ["ux", "integration"]}
+    },
+    {
+      "id": "P02",
+      "ordinal": 2,
+      "name": "Serve final site on localhost root",
+      "task": "Make http://localhost:5173 render the final dist visual site with CSS/images/scripts loading.",
+      "depends_on": ["P01"],
+      "work_items": [
+        {"text": "Sync dist/assets into public/assets for Next serving."},
+        {"text": "Replace the temporary Next homepage with a dist-shell page."},
+        {"text": "Update preview/standalone preparation so static assets are always copied."}
+      ],
+      "deliverables": [
+        {"id": "P02-D01", "kind": "source", "path": "app/page.tsx", "change_expectation": "modified", "verification": "root renders dist shell"},
+        {"id": "P02-D02", "kind": "source", "path": "scripts/prepare-standalone.mjs", "change_expectation": "modified", "verification": "standalone has static/public assets"}
+      ],
+      "criteria": [
+        {"id": "P02-C01", "statement": "Root page contains final-site markers including ALMATY KOTLY/WhatsApp/final hero classes.", "verifier": {"type": "smoke", "expected_assertion": "browser DOM markers"}, "evidence_tier": "direct_artifact", "blocking": true},
+        {"id": "P02-C02", "statement": "CSS, JS, fonts, and boiler images return HTTP 200 from localhost:5173.", "verifier": {"type": "command", "command_id": "P02-CMD01", "expected_exit": 0}, "evidence_tier": "direct_artifact", "blocking": true}
+      ],
+      "commands": [
+        {"id": "P02-CMD01", "command": "bash ops/healthcheck.sh --local", "purpose": "local health and release smoke", "safety": "local_read_write", "timeout_seconds": 180},
+        {"id": "P02-CMD02", "command": "npm run build", "purpose": "compile runtime", "safety": "local_read_write", "timeout_seconds": 300}
+      ],
+      "risk_tags": ["control_plane", "public_launch"],
+      "rpd": {"required": true, "focus": ["ux", "integration"]}
+    },
+    {
+      "id": "P03",
+      "ordinal": 3,
+      "name": "Lead capture bridge",
+      "task": "Wire the final site's request form to /api/leads without changing the visual bundle.",
+      "depends_on": ["P02"],
+      "work_items": [
+        {"text": "Add a capture script that posts final form fields to the backend API."},
+        {"text": "Show success/error in the existing final-site request note."},
+        {"text": "Keep validation and honeypot protections server-side."}
+      ],
+      "deliverables": [
+        {"id": "P03-D01", "kind": "source", "path": "src/components/FinalSiteBridge.tsx", "change_expectation": "new", "verification": "bridge script exists"},
+        {"id": "P03-D02", "kind": "source", "path": "app/api/leads/route.ts", "change_expectation": "modified", "verification": "API accepts final form fields"}
+      ],
+      "criteria": [
+        {"id": "P03-C01", "statement": "Submitting final-site request form creates one lead through /api/leads.", "verifier": {"type": "smoke", "expected_assertion": "lead API returns 201"}, "evidence_tier": "direct_artifact", "blocking": true},
+        {"id": "P03-C02", "statement": "Invalid submissions fail safely and reveal no secrets.", "verifier": {"type": "command", "command_id": "P03-CMD01", "expected_exit": 0}, "evidence_tier": "direct_artifact", "blocking": true}
+      ],
+      "commands": [
+        {"id": "P03-CMD01", "command": "npm test -- --runInBand", "purpose": "lead validation/repository tests", "safety": "local_read_write", "timeout_seconds": 300}
+      ],
+      "risk_tags": ["private_data"],
+      "rpd": {"required": true, "focus": ["security", "integration"]}
+    },
+    {
+      "id": "P04",
+      "ordinal": 4,
+      "name": "CRM admin and profile",
+      "task": "Expose CRM, admin Kanban, and profile routes on the same server with consistent protected data boundaries.",
+      "depends_on": ["P03"],
+      "work_items": [
+        {"text": "Add /crm as the lead operations dashboard."},
+        {"text": "Keep /admin/leads protected and useful for status changes."},
+        {"text": "Add /profile showing current admin/account state and Supabase mode."}
+      ],
+      "deliverables": [
+        {"id": "P04-D01", "kind": "source", "path": "app/crm/page.tsx", "change_expectation": "new", "verification": "route renders"},
+        {"id": "P04-D02", "kind": "source", "path": "app/profile/page.tsx", "change_expectation": "new", "verification": "route renders"}
+      ],
+      "criteria": [
+        {"id": "P04-C01", "statement": "/crm, /admin/leads, and /profile render on localhost:5173.", "verifier": {"type": "smoke", "expected_assertion": "HTTP 200 with expected markers"}, "evidence_tier": "direct_artifact", "blocking": true},
+        {"id": "P04-C02", "statement": "Protected routes use server-derived admin/session state and no raw provider payloads.", "verifier": {"type": "review", "expected_assertion": "auth boundary checked"}, "evidence_tier": "direct_artifact", "blocking": true}
+      ],
+      "commands": [
+        {"id": "P04-CMD01", "command": "npm run lint", "purpose": "typecheck CRM/profile/admin", "safety": "local_read_write", "timeout_seconds": 180}
+      ],
+      "risk_tags": ["auth", "private_data"],
+      "rpd": {"required": true, "focus": ["security", "integration", "ux"]}
+    },
+    {
+      "id": "P05",
+      "ordinal": 5,
+      "name": "Supabase authority",
+      "task": "Make Supabase mode explicit, testable, and ready for live credentials; prove live mode if credentials exist or record exact blocker.",
+      "depends_on": ["P04"],
+      "work_items": [
+        {"text": "Keep .env.example placeholder-only and document required Supabase keys."},
+        {"text": "Ensure /api/health reports memory vs supabase mode without secrets."},
+        {"text": "Run Supabase smoke if credentials are configured through safe runtime env."}
+      ],
+      "deliverables": [
+        {"id": "P05-D01", "kind": "source", "path": "supabase/migrations/202606280001_backend_v1.sql", "change_expectation": "modified", "verification": "schema supports CRM/profile/admin"},
+        {"id": "P05-D02", "kind": "report", "path": ".supergoal/reports/supabase-authority.md", "change_expectation": "new", "verification": "report names configured mode or blocker"}
+      ],
+      "criteria": [
+        {"id": "P05-C01", "statement": "Health endpoint reports backend data authority accurately without secrets.", "verifier": {"type": "command", "command_id": "P05-CMD01", "expected_exit": 0}, "evidence_tier": "direct_artifact", "blocking": true},
+        {"id": "P05-C02", "statement": "Live Supabase is verified or missing credential/project details are recorded as an exact blocker.", "verifier": {"type": "file", "expected_assertion": "report exists"}, "evidence_tier": "direct_artifact", "blocking": true}
+      ],
+      "commands": [
+        {"id": "P05-CMD01", "command": "curl -fsS http://127.0.0.1:5173/api/health", "purpose": "data authority smoke", "safety": "local_read_write", "timeout_seconds": 60},
+        {"id": "P05-CMD02", "command": "npm run build", "purpose": "compile after Supabase wiring", "safety": "local_read_write", "timeout_seconds": 300}
+      ],
+      "risk_tags": ["migration", "auth", "private_data"],
+      "rpd": {"required": true, "focus": ["security", "integration", "migration", "data-loss"]}
+    },
+    {
+      "id": "P06",
+      "ordinal": 6,
+      "name": "Final verification and handoff",
+      "task": "Run aggregate checks, visual/runtime smoke, secret scan, and leave a truthful handoff.",
+      "depends_on": ["P05"],
+      "work_items": [
+        {"text": "Run tests, lint, build, audit, SuperGoal validators, and diff checks."},
+        {"text": "Smoke root, assets, lead API, CRM, admin, profile, health, release."},
+        {"text": "Record any live Supabase/public production blockers honestly."}
+      ],
+      "deliverables": [
+        {"id": "P06-D01", "kind": "report", "path": ".supergoal/reports/final-handoff.md", "change_expectation": "new", "verification": "handoff exists with evidence"}
+      ],
+      "criteria": [
+        {"id": "P06-C01", "statement": "Aggregate build/lint/test/audit/diff checks pass or exact blockers are recorded.", "verifier": {"type": "command", "command_id": "P06-CMD01", "expected_exit": 0}, "evidence_tier": "direct_artifact", "blocking": true},
+        {"id": "P06-C02", "statement": "Final handoff states whether live Supabase is actually active and what remains.", "verifier": {"type": "file", "expected_assertion": "handoff exists"}, "evidence_tier": "direct_artifact", "blocking": true}
+      ],
+      "commands": [
+        {"id": "P06-CMD01", "command": "npm test -- --runInBand && npm run lint && npm run build && npm audit --omit=dev && git diff --check", "purpose": "aggregate verification", "safety": "local_read_write", "timeout_seconds": 600},
+        {"id": "P06-CMD02", "command": "python3 .supergoal/scripts/sgctl.py validate-package .supergoal", "purpose": "validate SuperGoal package", "safety": "local_read_write", "timeout_seconds": 120}
+      ],
+      "risk_tags": ["control_plane", "production"],
+      "rpd": {"required": true, "focus": ["integration", "security", "ux"]}
+    }
+  ],
+  "delivery": {
+    "review_pack_v2": {
+      "required": false,
+      "reason": "Codex desktop channel has no confirmed Telegram delivery approval for this package; files stay on disk."
+    }
+  },
+  "compatibility": {
+    "goalmanager": "standard-hermes",
+    "package_root": "/Users/azat/Desktop/.github/almaty-kotly/.supergoal",
+    "baseline_ref": "614fad3ce2e45b0612ddfd7a25bb4dca2b7459b3",
+    "known_dirty_tree": [
+      "dist/assets/index-mobilefix3-20260628.css",
+      "dist/assets/index-mobilefix3-20260628.js",
+      "dist/index.html"
+    ],
+    "required_skills": ["chip-supergoal", "chip-webb", "shaw", "server-doctor", "superpowers:writing-plans", "superpowers:systematic-debugging"],
+    "requires_final_audit": true,
+    "research_gate": {
+      "required": true,
+      "status": "satisfied",
+      "provider": "manual",
+      "query": "Plan final Alatau site CRM/admin/profile/Supabase integration from local repo state.",
+      "summary": "Manual research established that the latest visual site is the dist bundle, while the current Next homepage is a temporary backend shell. The new plan preserves the dist visual frontend at / and adds backend/CRM/admin/profile/Supabase on the same localhost runtime.",
+      "sources": [
+        {"provider": "manual", "title": "Local dist site", "locator": "dist/index.html"},
+        {"provider": "manual", "title": "Current Next backend shell", "locator": "app/ and src/"},
+        {"provider": "manual", "title": "User correction", "locator": "current Codex thread"}
+      ],
+      "provider_unavailable_reason": "No external web research needed; decisive facts are local current state and explicit user correction.",
+      "planning_implications": [
+        "Do not replace the final visual site with temporary Next components.",
+        "Keep localhost:5173 as the immediate verification target.",
+        "Treat live Supabase as required but secret/project access as evidence-gated."
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "planning_implications": [
+    "Do not replace the final visual site with temporary Next components.",
+    "Keep localhost:5173 as the immediate verification target.",
+    "Treat live Supabase as required but secret/project access as evidence-gated."
+  ],
+  "provider": "manual",
+  "provider_unavailable_reason": "No external web research needed; decisive facts are local current state and explicit user correction.",
+  "query": "Plan final Alatau site CRM/admin/profile/Supabase integration from local repo state.",
+  "required": true,
+  "schema_version": "1.0",
+  "skipped_reason": "",
+  "sources": [
+    {
+      "locator": "dist/index.html",
+      "provider": "manual",
+      "title": "Local dist site"
+    },
+    {
+      "locator": "app/ and src/",
+      "provider": "manual",
+      "title": "Current Next backend shell"
+    },
+    {
+      "locator": "current Codex thread",
+      "provider": "manual",
+      "title": "User correction"
+    }
+  ],
+  "status": "satisfied",
+  "summary": "Manual research established that the latest visual site is the dist bundle, while the current Next homepage is a temporary backend shell. The new plan preserves the dist visual frontend at / and adds backend/CRM/admin/profile/Supabase on the same localhost runtime."
+}

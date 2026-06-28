@@ -3,3 +3,8 @@ node_modules/
 dist/
 .env
 *.log
+.next/
+*.tsbuildinfo
+.vercel/
+.runtime/
+.supergoal.backup-*/

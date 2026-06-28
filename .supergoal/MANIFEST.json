@@ -1,0 +1,270 @@
+{
+  "artifacts": [
+    {
+      "bytes": 15632,
+      "mode": "0644",
+      "path": "CONTRACT.json",
+      "sha256": "c5260206494bc97924cb4a27e8d15f0902d12f807b969307a518745558b466f3"
+    },
+    {
+      "bytes": 1850,
+      "mode": "0644",
+      "path": "LAUNCH_GOAL.md",
+      "sha256": "b5ab59f092a80da4714c86e6694aeef50fb95d2bbc4137271f40335dc51c5cf6"
+    },
+    {
+      "bytes": 1586,
+      "mode": "0644",
+      "path": "LOOP_DESIGN.md",
+      "sha256": "c859284ffb0041bd4fbcc81769d9eab222b3336e1556ba5ee2b34e7899eace91"
+    },
+    {
+      "bytes": 19111,
+      "mode": "0644",
+      "path": "PROTOCOL.md",
+      "sha256": "82c58abd8c6ae935a3292d2783d2d5ee160757acca21279e073bf700242319e4"
+    },
+    {
+      "bytes": 1251,
+      "mode": "0644",
+      "path": "RESEARCH.md",
+      "sha256": "900cd30c99ccbe24748389678228c5f2fbecef58fa3bb412db93ce79c9190a79"
+    },
+    {
+      "bytes": 4511,
+      "mode": "0644",
+      "path": "ROADMAP.md",
+      "sha256": "f4dc54ced0bdb1fa0cb167ff385d4239aa3b156f26118eeccea8ba73fbb38959"
+    },
+    {
+      "bytes": 294,
+      "mode": "0644",
+      "path": "STATE.md",
+      "sha256": "220f3071b9d98fa5e84496826fd5f97d3c84f072bf31488804d8cc40a0b8f628"
+    },
+    {
+      "bytes": 1574,
+      "mode": "0644",
+      "path": "THINKING.md",
+      "sha256": "df5ee9657e3254084bcb0848ac2f806ac29347d0dd714b232a093832562a4370"
+    },
+    {
+      "bytes": 82,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/__init__.py",
+      "sha256": "1e6f8a044c25e11a5ab8b2c5b009b478201e9b716d04df1df93cdf4e6c05cf99"
+    },
+    {
+      "bytes": 4123,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/archive.py",
+      "sha256": "b5508c3072ea562341c3d5a60f561ec72320b996ddac2b7279718c928bb68e09"
+    },
+    {
+      "bytes": 4836,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/audit.py",
+      "sha256": "1474034fd695fd0a43b5a62ee35558fa256e081a8fa4f8fed97b4db22fb602e6"
+    },
+    {
+      "bytes": 9152,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/compile.py",
+      "sha256": "f851daea208751b46c522cae6d123194347c313c8010d36e8a4a024170b916c0"
+    },
+    {
+      "bytes": 2287,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/delivery.py",
+      "sha256": "4236e7d32806939f0f81782a856d4693e4e70053660c2d1ce377cbe60725046b"
+    },
+    {
+      "bytes": 2364,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/diagnostics.py",
+      "sha256": "75b82d3b4ff69e33d112d094c9570461fdbd0057555017088bdd87e68a49924d"
+    },
+    {
+      "bytes": 2461,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/events.py",
+      "sha256": "6918193ff05e2744569b3ad0d5ed10c29abf76f1d15942df845df157274370ad"
+    },
+    {
+      "bytes": 2629,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/evidence.py",
+      "sha256": "691858ca77192b7daf87a63f2515d6007f2ee26325bb3440be8a630ffe68827e"
+    },
+    {
+      "bytes": 1252,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/goalmanager_sim.py",
+      "sha256": "8921332f82b308812eb1783dabc5a9c411a6b2ff6c8fde339e41ab0a8f7febc5"
+    },
+    {
+      "bytes": 1436,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/graph.py",
+      "sha256": "19aaaff4beceb68350be02d269b5c63a000e5cd14f2d1b8228ec6b915d33226b"
+    },
+    {
+      "bytes": 1936,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/invariants.py",
+      "sha256": "e9c5883d1a293abee881c75c694603b897d5023cd89c5a6fedd47f09fdca22ca"
+    },
+    {
+      "bytes": 5476,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/migrate.py",
+      "sha256": "22ae14e2bc7467f44346287ea2adae35c2973052b237cf0ad3d77b91734f7c50"
+    },
+    {
+      "bytes": 10815,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/model.py",
+      "sha256": "3fd1b65ddbc7cb4859e75f521bb97c44a17f857feea42db95d6ebd15b7a1170b"
+    },
+    {
+      "bytes": 2201,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/normalize.py",
+      "sha256": "3e0747d2036e9388eb83e83f070ac33b9c60299476cdb66d859bcae68c6a3115"
+    },
+    {
+      "bytes": 963,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/policy.py",
+      "sha256": "d0925d47fc80fd0013617106ca9a99a3d8998186835c6d9709064ba43b96cfdd"
+    },
+    {
+      "bytes": 2261,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/references.py",
+      "sha256": "bd3909c8551e43f6d4dc429144a5458a8d4a9ba1c8c525ecff9e2f430797538e"
+    },
+    {
+      "bytes": 7629,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/render.py",
+      "sha256": "ca748066bc322711acc72e27f77a8e4864ae228598825a50c851abcc39dd02e0"
+    },
+    {
+      "bytes": 8059,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/research.py",
+      "sha256": "7893a7cf587d2a6da52eb76f23f57e4eeed21763a866f7aa01fb0c4887fb8a22"
+    },
+    {
+      "bytes": 6291,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/state.py",
+      "sha256": "7ce642b57df342f30153f3ac4e7359d79478b3c7e782182d66c47c48f4a1f1e0"
+    },
+    {
+      "bytes": 18408,
+      "mode": "0644",
+      "path": "lib/chip_supergoal/validate.py",
+      "sha256": "2bf8eb3ac567d2be7df168467cd213d265e6373aa5f7aeca5f46f1d705f666a1"
+    },
+    {
+      "bytes": 889,
+      "mode": "0644",
+      "path": "phases/phase-01.md",
+      "sha256": "35ae9e25fca87c2921922e799cdbfed441a7bc2dcb1b9d0424f23c12218549bf"
+    },
+    {
+      "bytes": 966,
+      "mode": "0644",
+      "path": "phases/phase-02.md",
+      "sha256": "38b46c373b105be53c3f46d4a6301b5158d36dfa4c4958805a475554acce9f47"
+    },
+    {
+      "bytes": 848,
+      "mode": "0644",
+      "path": "phases/phase-03.md",
+      "sha256": "9fb2f799b521619739050b94f9368d562bbbb03c625dd767486a5821cd1a902f"
+    },
+    {
+      "bytes": 856,
+      "mode": "0644",
+      "path": "phases/phase-04.md",
+      "sha256": "121ad812358470c1c6be740d320af8eb7852bdd6aac613defb224d40d7742e9b"
+    },
+    {
+      "bytes": 1040,
+      "mode": "0644",
+      "path": "phases/phase-05.md",
+      "sha256": "52cbb06ef07938ce9dde745b17e67aac37c88b778d21a20332e4ae01e32b8287"
+    },
+    {
+      "bytes": 1210,
+      "mode": "0644",
+      "path": "phases/phase-06.md",
+      "sha256": "b014e353afc10e3f030a382f68ebb1415add762aa447317efc7440c37312becd"
+    },
+    {
+      "bytes": 4337,
+      "mode": "0644",
+      "path": "reports/final-handoff.md",
+      "sha256": "cd1dbe59187d27631f2f4006dfed60ad1d82410feb1045ee50b9bea802a27637"
+    },
+    {
+      "bytes": 662,
+      "mode": "0644",
+      "path": "reports/final-site-source-lock.md",
+      "sha256": "9c2065afcf7edd1bff53a6c7f83b150bc693bbb69cf2f6c847c954e939615c9a"
+    },
+    {
+      "bytes": 1263,
+      "mode": "0644",
+      "path": "reports/research.json",
+      "sha256": "1c4bf3b0ba8d2ca596e2fe48aed31eba62b0eaa6845841431f44f458fa11300c"
+    },
+    {
+      "bytes": 3868,
+      "mode": "0644",
+      "path": "reports/supabase-authority.md",
+      "sha256": "f3308a40e0f36c01c31920dca0746b146d50b9ca1d87f826a1a5e756774d823e"
+    },
+    {
+      "bytes": 5888,
+      "mode": "0644",
+      "path": "scripts/repo-state.sh",
+      "sha256": "d9ab904fafb0f320fc3bea545fbb971551231a1baf0562e535e5afefcf8e028f"
+    },
+    {
+      "bytes": 3400,
+      "mode": "0644",
+      "path": "scripts/sgctl.py",
+      "sha256": "a67616770ea642cf98b3fb58b338c1306c022f131f73aec8c71549b33fafc059"
+    },
+    {
+      "bytes": 940,
+      "mode": "0644",
+      "path": "scripts/validate-loop-design.sh",
+      "sha256": "9f14de161ddf22515e2d4c608e9066378250bf8cde0661f3e19a03ce8476e36d"
+    },
+    {
+      "bytes": 836,
+      "mode": "0644",
+      "path": "scripts/validate-phase.sh",
+      "sha256": "623e7f680a0641bfed93b918ad3bb12776091f827c537b260c14eedf3a0148f3"
+    },
+    {
+      "bytes": 2720,
+      "mode": "0644",
+      "path": "spec/risk-policy.json",
+      "sha256": "8362a05307749fd2dfbd22af63c9d2e52d0cc448ba98849b6df28d334d356364"
+    },
+    {
+      "bytes": 19111,
+      "mode": "0644",
+      "path": "templates/PROTOCOL.md",
+      "sha256": "82c58abd8c6ae935a3292d2783d2d5ee160757acca21279e073bf700242319e4"
+    }
+  ],
+  "manifest_version": "1.0",
+  "package_fingerprint": "3c6054788e7e7371c6593a9c7cabe65242449885662265e6392da2d7ede5ec33"
+}
