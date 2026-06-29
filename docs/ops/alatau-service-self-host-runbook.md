@@ -99,8 +99,8 @@ When `/tmp/alatau-supabase.env.todo` exists, `mac-mini:next-action` audits that 
 
 `mac-mini:standalone-smoke` builds the standalone output, starts it on `127.0.0.1:5174` with memory backend, runs runtime acceptance, and stops the process. It proves the same `server.js` launchd will run, without installing launchd or touching public traffic. Use `--out /tmp/alatau-standalone-smoke.json` to save the receipt with owner-only permissions.
 
-`mac-mini:install:dry-run` runs the safe preflight chain and prints the install commands for release directories, deploy, and launchd installation. Dry-run continues after failed read-only gates so all blockers remain visible. Real execution requires running `bash ops/mac-mini-install.sh --execute` after explicit approval; execute mode stops before host writes if env audit, readiness, or template validation fails.
-`--skip-readiness` is allowed only for dry-run diagnostics; execute mode always requires the readiness gate.
+`mac-mini:install:dry-run` runs the safe preflight chain and prints the install commands for release directories, deploy, and launchd installation. Dry-run continues after failed read-only checks so all blockers remain visible. Real execution requires running `bash ops/mac-mini-install.sh --execute` after explicit approval; execute mode treats readiness as an operator report because launchd/app-port blockers are expected before bootstrap, but still stops before host writes if env audit, template validation, standalone smoke, or deploy dry-run fails.
+`--skip-readiness` is allowed only for dry-run diagnostics; execute mode always prints the readiness report before bootstrap.
 
 `mac-mini:caddy:dry-run` checks whether Homebrew/Caddy installation can be driven by the repo script. Real Caddy installation requires `bash ops/caddy-install.sh --execute` after explicit approval. If Homebrew is missing, install or choose another approved package manager first.
 

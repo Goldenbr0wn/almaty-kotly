@@ -672,7 +672,9 @@ describe("ops scripts", () => {
 
     expect(install).toContain("runtime_env_file");
     expect(install).toContain("blocked: --skip-readiness is allowed only in dry-run mode");
+    expect(install).toContain("run_report()");
     expect(install).toContain("npm run mac-mini:readiness -- --runtime-env-file=\"$runtime_env_file\"");
+    expect(install).toContain("continuing because bootstrap install is expected to clear launchd/app-port blockers");
     expect(install).toContain("ALATAU_RELEASE_ROOT=\"$release_root\" ALATAU_CURRENT_LINK=\"$current_link\" ALATAU_SUPABASE_ENV_FILE=\"$runtime_env_file\" bash ops/deploy.sh --dry-run");
     expect(install).toContain("ALATAU_SUPABASE_ENV_FILE=\"$runtime_env_file\"");
     expect(install).toContain("npm run supabase:env-audit -- --file \"$runtime_env_file\"");

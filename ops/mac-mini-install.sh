@@ -60,6 +60,22 @@ run_gate() {
   return 0
 }
 
+run_report() {
+  local label="$1"
+  shift
+  local report_status
+  echo "step: $label"
+  set +e
+  "$@"
+  report_status=$?
+  set -e
+  if [[ "$report_status" == "0" ]]; then
+    return 0
+  fi
+  echo "report: $label returned blockers; continuing because bootstrap install is expected to clear launchd/app-port blockers"
+  return 0
+}
+
 xml_escape() {
   local value="$1"
   value="${value//&/&amp;}"
@@ -124,7 +140,7 @@ cd "$repo_root"
 run_gate "env audit" npm run supabase:env-audit -- --file "$runtime_env_file"
 
 if [[ "$skip_readiness" != "1" ]]; then
-  run_gate "read-only readiness" npm run mac-mini:readiness -- --runtime-env-file="$runtime_env_file"
+  run_report "read-only readiness" npm run mac-mini:readiness -- --runtime-env-file="$runtime_env_file"
 fi
 
 run_gate "template validation" npm run mac-mini:templates
