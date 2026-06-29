@@ -1,3 +1,7 @@
+www.alatau-service.com {
+  redir https://alatau-service.com{uri} permanent
+}
+
 alatau-service.com {
   encode zstd gzip
   reverse_proxy 127.0.0.1:5173

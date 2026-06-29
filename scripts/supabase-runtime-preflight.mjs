@@ -11,7 +11,7 @@ function redactStatus(name) {
   return { name, configured: Boolean(process.env[name]) };
 }
 
-applyEnv(loadEnvFile(argValue("--env-file")));
+applyEnv(loadEnvFile(argValue("--runtime-env-file")));
 
 const missing = required.filter((name) => !process.env[name]);
 const result = {
@@ -38,27 +38,31 @@ async function restCheck(path) {
   });
 }
 
-const response = await restCheck("leads?select=id&limit=1");
+try {
+  const response = await restCheck("leads?select=id&limit=1");
 
-result.checks.push({ name: "rest_leads_select", status: response.status });
-if (!response.ok) {
-  result.blockers.push("public.leads REST check failed");
-}
+  result.checks.push({ name: "rest_leads_select", status: response.status });
+  if (!response.ok) {
+    result.blockers.push("public.leads REST check failed");
+  }
 
-const eventsResponse = await restCheck("lead_events?select=id&limit=1");
-result.checks.push({ name: "rest_lead_events_select", status: eventsResponse.status });
-if (!eventsResponse.ok) {
-  result.blockers.push("public.lead_events REST check failed");
-}
+  const eventsResponse = await restCheck("lead_events?select=id&limit=1");
+  result.checks.push({ name: "rest_lead_events_select", status: eventsResponse.status });
+  if (!eventsResponse.ok) {
+    result.blockers.push("public.lead_events REST check failed");
+  }
 
-const adminsResponse = await restCheck("admin_users?select=email&active=eq.true&limit=1");
-const activeAdminCount = adminsResponse.ok ? (await adminsResponse.json()).length : 0;
-result.checks.push({ name: "rest_active_admin_users_select", status: adminsResponse.status, count: activeAdminCount });
-if (!adminsResponse.ok) {
-  result.blockers.push("public.admin_users REST check failed");
-}
-if (activeAdminCount < 1) {
-  result.blockers.push("active admin_users count is 0");
+  const adminsResponse = await restCheck("admin_users?select=email&active=eq.true&limit=1");
+  const activeAdminCount = adminsResponse.ok ? (await adminsResponse.json()).length : 0;
+  result.checks.push({ name: "rest_active_admin_users_select", status: adminsResponse.status, count: activeAdminCount });
+  if (!adminsResponse.ok) {
+    result.blockers.push("public.admin_users REST check failed");
+  }
+  if (activeAdminCount < 1) {
+    result.blockers.push("active admin_users count is 0");
+  }
+} catch (error) {
+  result.blockers.push(error instanceof Error ? `Supabase REST preflight failed: ${error.message}` : "Supabase REST preflight failed");
 }
 
 if (result.blockers.length) {

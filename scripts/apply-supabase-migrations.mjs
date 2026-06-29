@@ -3,7 +3,7 @@ import { join } from "node:path";
 import postgres from "postgres";
 import { applyEnv, argValue, loadEnvFile } from "./env-file.mjs";
 
-applyEnv(loadEnvFile(argValue("--env-file")));
+applyEnv(loadEnvFile(argValue("--runtime-env-file")));
 
 const dbUrl = process.env.SUPABASE_DB_URL;
 const adminEmails = (process.env.ADMIN_EMAILS || "")

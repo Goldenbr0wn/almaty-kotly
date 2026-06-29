@@ -1,14 +1,15 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { argValue, loadEnvFile } from "./env-file.mjs";
+import { writeOwnerOnlyFile } from "./write-owner-file.mjs";
 
-const envFile = argValue("--env-file");
+const envFile = argValue("--runtime-env-file");
 const dryRun = process.argv.includes("--dry-run");
 if (!envFile) {
   console.log(JSON.stringify({
     ok: false,
-    blocker: "missing --env-file",
+    blocker: "missing --runtime-env-file",
     note: "Current localhost server was not touched."
   }, null, 2));
   process.exit(2);
@@ -36,8 +37,8 @@ function cutoverPlan() {
     preflightScript,
     note: dryRun ? "Dry run only. Current localhost server was not touched." : undefined,
     steps: [
-      { label: "apply Supabase migrations", command: `node scripts/apply-supabase-migrations.mjs --env-file ${envFile}`, destructive: false, skipped: false },
-      { label: "verify data runtime", command: `node ${preflightScript} --env-file ${envFile}`, destructive: false, skipped: false },
+      { label: "apply Supabase migrations", command: `node scripts/apply-supabase-migrations.mjs --runtime-env-file ${envFile}`, destructive: false, skipped: false },
+      { label: "verify data runtime", command: `node ${preflightScript} --runtime-env-file ${envFile}`, destructive: false, skipped: false },
       { label: "build app", command: "npm run build", destructive: false, skipped: false },
       { label: "prepare standalone", command: "npm run prepare:standalone", destructive: false, skipped: false },
       { label: "inspect current listener", command: `lsof -nP -iTCP:${port} -sTCP:LISTEN -t`, destructive: false, skipped: false },
@@ -79,8 +80,8 @@ function listenerPids() {
     .filter((pid) => pid !== String(process.pid));
 }
 
-run("apply Supabase migrations", "node", ["scripts/apply-supabase-migrations.mjs", "--env-file", envFile]);
-run("verify data runtime", "node", [preflightScript, "--env-file", envFile]);
+run("apply Supabase migrations", "node", ["scripts/apply-supabase-migrations.mjs", "--runtime-env-file", envFile]);
+run("verify data runtime", "node", [preflightScript, "--runtime-env-file", envFile]);
 run("build app", "npm", ["run", "build"]);
 run("prepare standalone", "npm", ["run", "prepare:standalone"]);
 
@@ -91,7 +92,7 @@ for (const pid of pids) {
 }
 
 mkdirSync(".runtime", { recursive: true });
-writeFileSync(join(".runtime", "last-cutover.json"), JSON.stringify({
+writeOwnerOnlyFile(join(".runtime", "last-cutover.json"), JSON.stringify({
   mode: "supabase",
   backend: env.DATA_BACKEND,
   port,

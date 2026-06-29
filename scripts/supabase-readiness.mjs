@@ -1,11 +1,12 @@
 import { applyEnv, argValue, loadEnvFile } from "./env-file.mjs";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+import { writeOwnerOnlyFile } from "./write-owner-file.mjs";
 
 const baseUrl = (argValue("--base-url") || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:5173").replace(/\/+$/, "");
 const outFile = argValue("--out");
 
-applyEnv(loadEnvFile(argValue("--env-file")));
+applyEnv(loadEnvFile(argValue("--runtime-env-file")));
 
 const backend = process.env.DATA_BACKEND === "postgres" ? "postgres" : process.env.DATA_BACKEND === "supabase" ? "supabase" : "memory";
 const postgresMissing = ["SUPABASE_DB_URL", "ADMIN_EMAILS"].filter((name) => !process.env[name]);
@@ -95,14 +96,14 @@ const report = {
   routes,
   blockers: readiness.blockers,
   next: readiness.ok
-    ? "Run PORT=5173 npm run supabase:cutover-local -- --env-file /path/to/alatau-supabase.env"
+    ? "Run PORT=5173 npm run supabase:cutover-local -- --runtime-env-file /path/to/alatau-supabase.env"
     : "Fix blockers, then run npm run supabase:env-status and the matching preflight.",
   generatedAt: new Date().toISOString()
 };
 
 if (outFile) {
   mkdirSync(dirname(outFile), { recursive: true });
-  writeFileSync(outFile, JSON.stringify(report, null, 2) + "\n", "utf8");
+  writeOwnerOnlyFile(outFile, JSON.stringify(report, null, 2) + "\n");
 }
 
 console.log(JSON.stringify(report, null, 2));

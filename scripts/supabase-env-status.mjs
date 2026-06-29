@@ -1,4 +1,5 @@
 import { applyEnv, argValue, loadEnvFile } from "./env-file.mjs";
+import { isPlaceholderValue } from "./env-placeholder.mjs";
 
 const postgresKeys = ["SUPABASE_DB_URL", "ADMIN_EMAILS"];
 const supabaseKeys = [
@@ -14,10 +15,12 @@ function configured(env, name) {
 
 function groupStatus(env, keys) {
   const missing = keys.filter((name) => !configured(env, name));
+  const placeholders = keys.filter((name) => isPlaceholderValue(env[name]));
   return {
-    ready: missing.length === 0,
+    ready: missing.length === 0 && placeholders.length === 0,
     missing,
-    keys: keys.map((name) => ({ name, configured: configured(env, name) }))
+    placeholders,
+    keys: keys.map((name) => ({ name, configured: configured(env, name), placeholder: isPlaceholderValue(env[name]) }))
   };
 }
 
@@ -34,11 +37,11 @@ function buildEnvStatus(env) {
     postgres: groupStatus(env, postgresKeys),
     supabase: groupStatus(env, supabaseKeys),
     recommendedNextCommand: backend === "postgres"
-      ? "npm run postgres:preflight -- --env-file /path/to/alatau-supabase.env"
-      : "npm run supabase:preflight -- --env-file /path/to/alatau-supabase.env"
+      ? "npm run postgres:preflight -- --runtime-env-file /path/to/alatau-supabase.env"
+      : "npm run supabase:preflight -- --runtime-env-file /path/to/alatau-supabase.env"
   };
 }
 
-applyEnv(loadEnvFile(argValue("--env-file")));
+applyEnv(loadEnvFile(argValue("--runtime-env-file")));
 
 console.log(JSON.stringify(buildEnvStatus(process.env), null, 2));

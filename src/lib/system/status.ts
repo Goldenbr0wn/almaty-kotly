@@ -72,9 +72,9 @@ export function getSystemStatus(): SystemStatus {
     supabase,
     postgres,
     commands: {
-      migrate: "npm run supabase:migrate -- --env-file /path/to/alatau-supabase.env",
-      preflight: "npm run supabase:preflight -- --env-file /path/to/alatau-supabase.env",
-      cutover: "PORT=5173 npm run supabase:cutover-local -- --env-file /path/to/alatau-supabase.env"
+      migrate: "npm run supabase:migrate -- --runtime-env-file /path/to/alatau-supabase.env",
+      preflight: "npm run supabase:preflight -- --runtime-env-file /path/to/alatau-supabase.env",
+      cutover: "PORT=5173 npm run supabase:cutover-local -- --runtime-env-file /path/to/alatau-supabase.env"
     }
   };
 }

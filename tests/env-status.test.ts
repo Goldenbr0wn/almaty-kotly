@@ -13,11 +13,27 @@ describe("env status", () => {
     });
 
     expect(status.backend).toBe("postgres");
-    expect(status.postgres.ready).toBe(true);
+    expect(status.postgres.ready).toBe(false);
+    expect(status.postgres.placeholders).toEqual(["SUPABASE_DB_URL", "ADMIN_EMAILS"]);
     expect(status.supabase.ready).toBe(false);
     expect(status.supabase.missing).toEqual(["SUPABASE_SERVICE_ROLE_KEY"]);
+    expect(status.supabase.placeholders).toEqual(["ADMIN_EMAILS"]);
     expect(status.recommendedNextCommand).toContain("postgres:preflight");
     expect(JSON.stringify(status)).not.toContain("SECRET_PASSWORD");
     expect(JSON.stringify(status)).not.toContain("SECRET_ANON");
+  });
+
+  it("passes only when required values are configured and not placeholder-looking", () => {
+    const status = buildEnvStatus({
+      DATA_BACKEND: "supabase",
+      ADMIN_EMAILS: "admin@alatau-service.com",
+      NEXT_PUBLIC_SUPABASE_URL: "https://configured.supabase.co",
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: "configured-anon-key",
+      SUPABASE_SERVICE_ROLE_KEY: "configured-service-role-key"
+    });
+
+    expect(status.supabase.ready).toBe(true);
+    expect(status.supabase.missing).toEqual([]);
+    expect(status.supabase.placeholders).toEqual([]);
   });
 });

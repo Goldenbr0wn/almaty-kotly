@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { argValue, loadEnvFile } from "./env-file.mjs";
 
-const fileEnv = loadEnvFile(argValue("--env-file"));
+const fileEnv = loadEnvFile(argValue("--runtime-env-file"));
 const env = {
   ...process.env,
   ...fileEnv,

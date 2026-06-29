@@ -1,7 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-mode="${1:---local}"
+mode="--local"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --local)
+      mode="--local"
+      shift
+      ;;
+    --production)
+      mode="--production"
+      shift
+      ;;
+    *)
+      echo "unknown argument: $1" >&2
+      exit 2
+      ;;
+  esac
+done
+
 if [[ "$mode" == "--production" ]]; then
   base_url="https://alatau-service.com"
 else

@@ -1,7 +1,7 @@
 import postgres from "postgres";
 import { applyEnv, argValue, loadEnvFile } from "./env-file.mjs";
 
-applyEnv(loadEnvFile(argValue("--env-file")));
+applyEnv(loadEnvFile(argValue("--runtime-env-file")));
 
 const required = ["SUPABASE_DB_URL", "ADMIN_EMAILS"];
 const missing = required.filter((name) => !process.env[name]);

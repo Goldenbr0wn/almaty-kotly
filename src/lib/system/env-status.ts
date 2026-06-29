@@ -1,11 +1,13 @@
 import type { DataBackend } from "@/lib/env";
+import { isPlaceholderValue } from "@/lib/system/env-placeholder";
 
 type EnvMap = Record<string, string | undefined>;
 
 type EnvGroupStatus = {
   ready: boolean;
   missing: string[];
-  keys: Array<{ name: string; configured: boolean }>;
+  placeholders: string[];
+  keys: Array<{ name: string; configured: boolean; placeholder: boolean }>;
 };
 
 export type EnvStatus = {
@@ -29,10 +31,12 @@ function configured(env: EnvMap, name: string): boolean {
 
 function groupStatus(env: EnvMap, keys: string[]): EnvGroupStatus {
   const missing = keys.filter((name) => !configured(env, name));
+  const placeholders = keys.filter((name) => isPlaceholderValue(env[name]));
   return {
-    ready: missing.length === 0,
+    ready: missing.length === 0 && placeholders.length === 0,
     missing,
-    keys: keys.map((name) => ({ name, configured: configured(env, name) }))
+    placeholders,
+    keys: keys.map((name) => ({ name, configured: configured(env, name), placeholder: isPlaceholderValue(env[name]) }))
   };
 }
 
@@ -47,8 +51,8 @@ export function buildEnvStatus(env: EnvMap): EnvStatus {
   const postgres = groupStatus(env, postgresKeys);
   const supabase = groupStatus(env, supabaseKeys);
   const recommendedNextCommand = backend === "postgres"
-    ? "npm run postgres:preflight -- --env-file /path/to/alatau-supabase.env"
-    : "npm run supabase:preflight -- --env-file /path/to/alatau-supabase.env";
+    ? "npm run postgres:preflight -- --runtime-env-file /path/to/alatau-supabase.env"
+    : "npm run supabase:preflight -- --runtime-env-file /path/to/alatau-supabase.env";
 
   return {
     backend,

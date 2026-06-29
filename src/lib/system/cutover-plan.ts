@@ -37,8 +37,8 @@ export function buildCutoverPlan(input: CutoverPlanInput): CutoverPlan {
     ...input,
     preflightScript,
     steps: [
-      { label: "apply Supabase migrations", command: `node scripts/apply-supabase-migrations.mjs --env-file ${input.envFile}`, destructive: false, skipped: false },
-      { label: "verify data runtime", command: `node ${preflightScript} --env-file ${input.envFile}`, destructive: false, skipped: false },
+      { label: "apply Supabase migrations", command: `node scripts/apply-supabase-migrations.mjs --runtime-env-file ${input.envFile}`, destructive: false, skipped: false },
+      { label: "verify data runtime", command: `node ${preflightScript} --runtime-env-file ${input.envFile}`, destructive: false, skipped: false },
       { label: "build app", command: "npm run build", destructive: false, skipped: false },
       { label: "prepare standalone", command: "npm run prepare:standalone", destructive: false, skipped: false },
       { label: "inspect current listener", command: `lsof -nP -iTCP:${input.port} -sTCP:LISTEN -t`, destructive: false, skipped: false },

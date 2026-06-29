@@ -2,7 +2,9 @@ import { existsSync, readFileSync } from "node:fs";
 
 export function argValue(name) {
   const index = process.argv.indexOf(name);
-  return index >= 0 ? process.argv[index + 1] : undefined;
+  if (index >= 0) return process.argv[index + 1];
+  const prefixed = process.argv.find((arg) => arg.startsWith(`${name}=`));
+  return prefixed ? prefixed.slice(name.length + 1) : undefined;
 }
 
 export function loadEnvFile(path) {
