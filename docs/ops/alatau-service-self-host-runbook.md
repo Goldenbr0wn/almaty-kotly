@@ -24,6 +24,12 @@ npm run lesson3:status -- --accept-web-audit-fallback
 npm run lesson3:report -- --accept-web-audit-fallback --out /tmp/alatau-lesson3-report.md
 npm run lesson3:ru-summary -- --accept-web-audit-fallback --out /tmp/alatau-lesson3-ru-summary.md
 npm run lesson3:completion-audit -- --prepared-env /tmp/alatau-supabase.env.todo --accept-web-audit-fallback --out /tmp/alatau-lesson3-completion-audit.json
+npm run lesson3:skill-verify -- --out /tmp/alatau-lesson3-skill-verify.json
+npm run lesson3:screen-checklist -- --accept-web-audit-fallback --out /tmp/alatau-lesson3-screen-checklist.json
+npm run lesson3:server-doctor-equivalent -- --out /tmp/alatau-lesson3-server-doctor-equivalent.json
+npm run lesson3:approval-packet -- --out /tmp/alatau-lesson3-approval-packet.json
+npm run lesson3:cutover-handoff -- --out /tmp/alatau-lesson3-cutover-handoff.md
+npm run lesson3:checkbox-guide -- --out /tmp/alatau-lesson3-checkbox-guide.md
 npm run lesson3:bundle -- --prepared-env /tmp/alatau-supabase.env.todo --accept-web-audit-fallback --out /tmp/alatau-lesson3-bundle-default.json
 npm run lesson3:bundle -- --prepared-env /tmp/alatau-supabase.env.todo --accept-web-audit-fallback --include-standalone-smoke --out /tmp/alatau-lesson3-bundle.json
 npm run lesson3:bundle -- --prepared-env /tmp/alatau-supabase.env.todo --accept-web-audit-fallback --include-standalone-smoke --include-guarded-dry-runs --out /tmp/alatau-lesson3-bundle-full.json
@@ -67,6 +73,18 @@ npm run mac-mini:post-cutover -- --out /tmp/alatau-post-cutover.json
 `lesson3:ru-summary` renders the same status as a concise Russian answer for the operator: what is done, what remains, and the next action, without printing secret values.
 
 `lesson3:completion-audit` writes a machine-readable audit of every homework requirement, evidence status, missing item, and completion blocker. It is read-only and is the final guard against claiming the lesson complete while any user story remains partial or blocked.
+
+`lesson3:skill-verify` verifies the installed Lesson 3 public skill equivalents without mutating local state. It proves that the locally installed `server-doctor` public-clean skill covers the `server-doctor-public` homework slot, that `web-audit` declares `/seo-aeo-geo-principal`, and that `chip-legal-web-rf` is installed.
+
+`lesson3:screen-checklist` maps the visible Human20 Lesson 3 screenshot checklist to concrete local evidence. It reports installed skills, the accepted `web-audit` replacement for `seo-aeo-geo-principal`, the Mac mini replacement for VPS work, email/legal planning artifacts, and remaining partial server/DNS/live-acceptance items without printing secrets.
+
+`lesson3:server-doctor-equivalent` runs the read-only Mac mini equivalent of the `server-doctor-public` VPS pass. It collects `mac-mini:status`, `mac-mini:network-probe`, and `mac-mini:security-audit` evidence, then writes an owner-only receipt without mutating host, DNS, router, or secrets.
+
+`lesson3:approval-packet` renders the exact approval-gated execute commands for the remaining hardening, launchd/Caddy, DNS, and post-cutover acceptance work. It is read-only, writes an owner-only packet, and does not execute those commands.
+
+`lesson3:cutover-handoff` renders the remaining router/DNS/post-cutover operator path. It names the router forwarding target, verification commands, guarded DNS execute command, post-cutover acceptance command, and stop-lines before marking the final Human20 checkboxes.
+
+`lesson3:checkbox-guide` renders a Human20-ready checklist from `lesson3:screen-checklist`: which visible Lesson 3 tasks can be checked now (`done` or accepted `equivalent`) and which must remain unchecked (`partial`).
 
 `lesson3:bundle` refreshes the complete redacted Lesson 3 handoff set in one read-only pass: skill gap, lesson report, Supabase fill guide, postfill gate, Mac mini next action, operator checklist, status, handoff, and one-page operator handoff. Commands that return non-zero because the site is not ready yet are recorded as expected non-ready states rather than treated as tool failures. Add `--include-standalone-smoke` when you also want the bundle to build standalone assets, start a local `127.0.0.1` memory-backend server, save `/tmp/alatau-standalone-smoke.json`, and stop it. Add `--include-guarded-dry-runs` to refresh `/tmp/alatau-guarded-dry-run-receipt.json`, which records the guarded env install, Mac mini install, Caddy, and security hardening dry-runs without host/DNS/router mutation. Pass `--command-timeout-ms 180000` to tune the per-command timeout for slow local machines.
 
