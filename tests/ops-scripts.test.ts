@@ -363,6 +363,152 @@ describe("ops scripts", () => {
     expect(lessonStatus).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
   });
 
+  it("maps the visible Lesson 3 screenshot checklist to concrete local evidence", () => {
+    const screenChecklist = readFileSync("scripts/lesson3-screen-checklist.mjs", "utf8");
+    const pkg = readFileSync("package.json", "utf8");
+    const emailPlan = readFileSync("docs/ops/email-contour-plan.md", "utf8");
+    const legalTodo = readFileSync("docs/legal/legal-todo.md", "utf8");
+
+    expect(pkg).toContain("lesson3:screen-checklist");
+    expect(screenChecklist).toContain("lesson-3-screen-checklist");
+    expect(screenChecklist).toContain("lesson3:skill-verify");
+    expect(screenChecklist).toContain("/tmp/alatau-lesson3-skill-verify.json");
+    expect(screenChecklist).toContain("server-doctor-public");
+    expect(screenChecklist).toContain("server-doctor");
+    expect(screenChecklist).toContain("web-audit");
+    expect(screenChecklist).toContain("seo-aeo-geo-principal");
+    expect(screenChecklist).toContain("chip-legal-web-rf");
+    expect(screenChecklist).toContain("email-contour-plan.md");
+    expect(screenChecklist).toContain("legal-todo.md");
+    expect(screenChecklist).toContain("equivalent");
+    expect(screenChecklist).toContain("ready-for-approved-dns-cutover");
+    expect(screenChecklist).toContain("readOnly: true");
+    expect(screenChecklist).toContain("secretsPrinted: false");
+    expect(screenChecklist).toContain("writeOwnerOnlyFile");
+    expect(emailPlan).toContain("Resend");
+    expect(emailPlan).toContain("secrets are runtime-injected");
+    expect(legalTodo).toContain("chip-legal-web-rf");
+    expect(legalTodo).toContain("/legal/privacy");
+    expect(screenChecklist).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+    expect(emailPlan).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+    expect(legalTodo).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+  });
+
+  it("verifies the installed Lesson 3 public skill equivalents without mutating local state", () => {
+    const skillVerify = readFileSync("scripts/lesson3-skill-verify.mjs", "utf8");
+    const pkg = readFileSync("package.json", "utf8");
+    const readme = readFileSync("README.md", "utf8");
+    const runbook = readFileSync("docs/ops/alatau-service-self-host-runbook.md", "utf8");
+
+    expect(pkg).toContain("lesson3:skill-verify");
+    expect(skillVerify).toContain("lesson-3-skill-verify");
+    expect(skillVerify).toContain("/Users/azat/.codex/skills/server-doctor/SKILL.md");
+    expect(skillVerify).toContain("This public version is intentionally generic");
+    expect(skillVerify).toContain("server-doctor-public");
+    expect(skillVerify).toContain("web-audit");
+    expect(skillVerify).toContain("/seo-aeo-geo-principal");
+    expect(skillVerify).toContain("chip-legal-web-rf");
+    expect(skillVerify).toContain("readOnly: true");
+    expect(skillVerify).toContain("secretsPrinted: false");
+    expect(skillVerify).toContain("hostDnsRouterMutations: false");
+    expect(skillVerify).toContain("writeOwnerOnlyFile");
+    expect(readme).toContain("lesson3:skill-verify");
+    expect(runbook).toContain("lesson3:skill-verify");
+    expect(skillVerify).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+  });
+
+  it("keeps the Lesson 3 server-doctor equivalent receipt read-only", () => {
+    const serverDoctorEquivalent = readFileSync("scripts/lesson3-server-doctor-equivalent.mjs", "utf8");
+    const pkg = readFileSync("package.json", "utf8");
+    const readme = readFileSync("README.md", "utf8");
+    const runbook = readFileSync("docs/ops/alatau-service-self-host-runbook.md", "utf8");
+
+    expect(pkg).toContain("lesson3:server-doctor-equivalent");
+    expect(serverDoctorEquivalent).toContain("lesson-3-server-doctor-equivalent");
+    expect(serverDoctorEquivalent).toContain("server-doctor-public");
+    expect(serverDoctorEquivalent).toContain("Mac mini M4 self-host");
+    expect(serverDoctorEquivalent).toContain("mac-mini:status");
+    expect(serverDoctorEquivalent).toContain("mac-mini:network-probe");
+    expect(serverDoctorEquivalent).toContain("mac-mini:security-audit");
+    expect(serverDoctorEquivalent).toContain("readOnly: true");
+    expect(serverDoctorEquivalent).toContain("secretsPrinted: false");
+    expect(serverDoctorEquivalent).toContain("hostDnsRouterMutations: false");
+    expect(serverDoctorEquivalent).toContain("writeOwnerOnlyFile");
+    expect(readme).toContain("lesson3:server-doctor-equivalent");
+    expect(runbook).toContain("lesson3:server-doctor-equivalent");
+    expect(serverDoctorEquivalent).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+  });
+
+  it("renders a Lesson 3 approval packet for the remaining mutation-gated work", () => {
+    const approvalPacket = readFileSync("scripts/lesson3-approval-packet.mjs", "utf8");
+    const pkg = readFileSync("package.json", "utf8");
+    const readme = readFileSync("README.md", "utf8");
+    const runbook = readFileSync("docs/ops/alatau-service-self-host-runbook.md", "utf8");
+
+    expect(pkg).toContain("lesson3:approval-packet");
+    expect(approvalPacket).toContain("lesson-3-approval-packet");
+    expect(approvalPacket).toContain("mac-mini:security-hardening:dry-run");
+    expect(approvalPacket).toContain("mac-mini:install:dry-run");
+    expect(approvalPacket).toContain("mac-mini:caddy:dry-run");
+    expect(approvalPacket).toContain("mac-mini:caddy-service:dry-run");
+    expect(approvalPacket).toContain("mac-mini:dns-cutover:dry-run");
+    expect(approvalPacket).toContain("mac-mini:post-cutover");
+    expect(approvalPacket).toContain("ALATAU_SECURITY_HARDENING_CONFIRMED=1");
+    expect(approvalPacket).toContain("ALATAU_CADDY_SERVICE_CONFIRMED=1");
+    expect(approvalPacket).toContain("ALATAU_DNS_CUTOVER_CONFIRMED=1");
+    expect(approvalPacket).toContain("ALATAU_POST_CUTOVER_CONFIRMED=1");
+    expect(approvalPacket).toContain("readOnly: true");
+    expect(approvalPacket).toContain("secretsPrinted: false");
+    expect(approvalPacket).toContain("executeModeCommandsAreApprovalGated: true");
+    expect(approvalPacket).toContain("writeOwnerOnlyFile");
+    expect(readme).toContain("lesson3:approval-packet");
+    expect(runbook).toContain("lesson3:approval-packet");
+    expect(approvalPacket).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+  });
+
+  it("renders a read-only Lesson 3 cutover handoff for the remaining router DNS path", () => {
+    const cutoverHandoff = readFileSync("scripts/lesson3-cutover-handoff.mjs", "utf8");
+    const pkg = readFileSync("package.json", "utf8");
+    const readme = readFileSync("README.md", "utf8");
+    const runbook = readFileSync("docs/ops/alatau-service-self-host-runbook.md", "utf8");
+
+    expect(pkg).toContain("lesson3:cutover-handoff");
+    expect(cutoverHandoff).toContain("lesson-3-cutover-handoff");
+    expect(cutoverHandoff).toContain("Forward router ports 80 and 443 to 192.168.8.12");
+    expect(cutoverHandoff).toContain("ready-for-approved-dns-cutover");
+    expect(cutoverHandoff).toContain("ALATAU_DNS_CUTOVER_CONFIRMED=1");
+    expect(cutoverHandoff).toContain("ALATAU_POST_CUTOVER_CONFIRMED=1");
+    expect(cutoverHandoff).toContain("npm run mac-mini:network-probe");
+    expect(cutoverHandoff).toContain("npm run lesson3:completion-audit");
+    expect(cutoverHandoff).toContain("readOnly: true");
+    expect(cutoverHandoff).toContain("secretsPrinted: false");
+    expect(cutoverHandoff).toContain("hostDnsRouterMutations: false");
+    expect(cutoverHandoff).toContain("writeOwnerOnlyFile");
+    expect(readme).toContain("lesson3:cutover-handoff");
+    expect(runbook).toContain("lesson3:cutover-handoff");
+    expect(cutoverHandoff).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+  });
+
+  it("renders a Human20 checkbox guide from the screen checklist", () => {
+    const guide = readFileSync("scripts/lesson3-checkbox-guide.mjs", "utf8");
+    const pkg = readFileSync("package.json", "utf8");
+    const readme = readFileSync("README.md", "utf8");
+    const runbook = readFileSync("docs/ops/alatau-service-self-host-runbook.md", "utf8");
+
+    expect(pkg).toContain("lesson3:checkbox-guide");
+    expect(guide).toContain("lesson3:screen-checklist");
+    expect(guide).toContain("Human20 Lesson 3 Checkbox Guide");
+    expect(guide).toContain("Можно ставить галочку");
+    expect(guide).toContain("Не ставить пока");
+    expect(guide).toContain("done");
+    expect(guide).toContain("equivalent");
+    expect(guide).toContain("partial");
+    expect(guide).toContain("writeOwnerOnlyFile");
+    expect(readme).toContain("lesson3:checkbox-guide");
+    expect(runbook).toContain("lesson3:checkbox-guide");
+    expect(guide).not.toContain("SUPABASE_SERVICE_ROLE_KEY=");
+  });
+
   it("keeps lesson 3 skill-gap audit read-only and explicit about the SEO fallback", () => {
     const skillGap = readFileSync("scripts/lesson3-skill-gap.mjs", "utf8");
 
@@ -418,11 +564,13 @@ describe("ops scripts", () => {
       expect(doc).toContain("lesson3:skill-gap -- --accept-web-audit-fallback");
       expect(doc).toContain("lesson3:status -- --accept-web-audit-fallback");
       expect(doc).toContain("lesson3:completion-audit -- --prepared-env /tmp/alatau-supabase.env.todo --accept-web-audit-fallback");
+      expect(doc).toContain("lesson3:screen-checklist -- --accept-web-audit-fallback");
       expect(doc).toContain("lesson3:bundle -- --prepared-env /tmp/alatau-supabase.env.todo --accept-web-audit-fallback");
       expect(doc).toContain("--include-guarded-dry-runs");
       expect(doc).toContain("lesson3:guarded-dry-runs");
       expect(doc).toContain("/tmp/alatau-guarded-dry-run-receipt.json");
       expect(doc).toContain("lesson3:operator-handoff");
+      expect(doc).toContain("/tmp/alatau-lesson3-screen-checklist.json");
       expect(doc).toContain("/tmp/alatau-lesson3-operator-handoff.md");
       expect(doc).toContain("web-audit");
       expect(doc).toContain("supabase:env-fill-interactive");
@@ -512,10 +660,13 @@ describe("ops scripts", () => {
     expect(bundle).toContain("lesson3:report");
     expect(bundle).toContain("lesson3:completion-audit");
     expect(bundle).toContain("lesson3:operator-handoff");
+    expect(bundle).toContain("lesson3:cutover-handoff");
     expect(bundle).toContain("/tmp/alatau-lesson3-completion-audit.json");
     expect(bundle).toContain("/tmp/alatau-lesson3-operator-handoff.md");
+    expect(bundle).toContain("/tmp/alatau-lesson3-cutover-handoff.md");
     expect(bundle).toContain("id: \"lesson3-completion-audit\"");
     expect(bundle).toContain("id: \"lesson3-operator-handoff\"");
+    expect(bundle).toContain("id: \"lesson3-cutover-handoff\"");
     expect(bundle).toContain("nonReadyIsExpected: true");
     expect(bundle).toContain("--prepared-env\", preparedEnv");
     expect(bundle).toContain("supabase:env-fill-guide");
