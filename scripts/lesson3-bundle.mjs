@@ -111,6 +111,13 @@ commands.push({
   nonReadyIsExpected: false
 });
 
+commands.push({
+  id: "lesson3-cutover-handoff",
+  artifact: "/tmp/alatau-lesson3-cutover-handoff.md",
+  args: ["run", "lesson3:cutover-handoff", "--", "--out", "/tmp/alatau-lesson3-cutover-handoff.md"],
+  nonReadyIsExpected: false
+});
+
 function runCommand(entry) {
   const result = spawnSync("npm", entry.args, { encoding: "utf8", timeout: commandTimeoutMs });
   return {
